@@ -4,7 +4,7 @@ import uvicorn
 import numpy as np
 from io import BytesIO
 from PIL import Image
-import pickle
+import tensorflow as tf
 
 app = FastAPI()
 
@@ -20,8 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-with open('model_pickle', 'rb') as file:
-    MODEL = pickle.load(file)
+# Load the Keras model
+MODEL = tf.keras.models.load_model('potatoes.h5')
 
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
 
